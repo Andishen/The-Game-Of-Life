@@ -2,7 +2,7 @@
   "name": "game-of-life",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Andishen.github.io/game-of-life",
+  "homepage": "https://Andishen.github.io/The-Game-Of-Life",
   "type": "module",
   "scripts": {
     "dev": "vite",

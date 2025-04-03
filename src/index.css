@@ -32,7 +32,7 @@ body {
   box-shadow: var(--shadow);
   transition: transform 0.2s ease;
   background-color: #f3f3f3;
-  width: 1000px;
+  width: 60%;
 }
 
 .card:hover {
