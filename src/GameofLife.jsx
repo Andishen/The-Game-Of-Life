@@ -18,29 +18,29 @@ import yacht from "/src/assets/yacht.png";
 
 const spendingOptions = {
   20: [
-    { name: "Florida Vacation", imgSrc: luxuryTravel, position: { top: "210px", left: "300px" }, size: "400px", zIndex: 1 },
-    { name: "Nice Car", imgSrc: newCar, position: { top: "10px", left: "10px" }, size: "250px", zIndex: 1 },
-    { name: "Gaming PC", imgSrc: latestGadgets, position: { top: "30px", left: "30px" }, size: "150px", zIndex: 1 }
+    { name: "Florida Vacation", imgSrc: luxuryTravel, position: { top: "210px", left: "300px" }, size: "400px", zIndex: 1, persistent: false },
+    { name: "Nice Car", imgSrc: newCar, position: { top: "10px", left: "10px" }, size: "250px", zIndex: 1, persistent: false },
+    { name: "Gaming PC", imgSrc: latestGadgets, position: { top: "30px", left: "30px" }, size: "150px", zIndex: 1, persistent: false }
   ],
   30: [
-    { name: "Get Married", imgSrc: weddingHoneymoon, position: { bottom: "0px", left: "550px" }, size: "70px", zIndex: 1 },
-    { name: "Luxury Apartment", imgSrc: luxuryApartment, position: { top: "20px", left: "270px" }, size: "180px", zIndex: 1 },
-    { name: "Designer Clothes", imgSrc: designerClothes, position: { top: "268px", left: "441px" }, size: "120px", zIndex: 10 }
+    { name: "Get Married", imgSrc: weddingHoneymoon, position: { bottom: "0px", left: "550px" }, size: "70px", zIndex: 1, persistent: true },
+    { name: "Luxury Apartment", imgSrc: luxuryApartment, position: { top: "20px", left: "270px" }, size: "180px", zIndex: 1, persistent: false },
+    { name: "Designer Clothes", imgSrc: designerClothes, position: { top: "268px", left: "441px" }, size: "120px", zIndex: 10, persistent: false }
   ],
   40: [
-    { name: "Private School for Kids", imgSrc: privateSchool, position: { top: "30px", left: "500px" }, size: "200px", zIndex: 1 },
-    { name: "Exotic Car", imgSrc: exoticCar, position: { top: "30px", left: "500px" }, size: "200px", zIndex: 1 },
-    { name: "Home Renovation", imgSrc: homeRenovation, position: { bottom: "180px", left: "330px" }, size: "170px", zIndex: 1 }
+    { name: "Private School for Kids", imgSrc: privateSchool, position: { top: "30px", left: "500px" }, size: "200px", zIndex: 1, persistent: false },
+    { name: "Exotic Car", imgSrc: exoticCar, position: { top: "30px", left: "500px" }, size: "200px", zIndex: 1, persistent: false },
+    { name: "Home Renovation", imgSrc: homeRenovation, position: { bottom: "180px", left: "330px" }, size: "170px", zIndex: 1, persistent: false }
   ],
   50: [
-    { name: "Vacation Home", imgSrc: vacationHome, position: { top: "4px", right: "50px" }, size: "240px", zIndex: 1 },
-    { name: "World Tour", imgSrc: worldTour, position: { top: "45px", right: "55px" }, size: "160px", zIndex: 1 },
-    { name: "Golf Club Membership", imgSrc: golfClub, position: { bottom: "10px", left: "470px" }, size: "80px", zIndex: 1 }
+    { name: "Vacation Home", imgSrc: vacationHome, position: { top: "4px", right: "50px" }, size: "240px", zIndex: 1, persistent: false },
+    { name: "World Tour", imgSrc: worldTour, position: { top: "45px", right: "55px" }, size: "160px", zIndex: 1, persistent: false },
+    { name: "Golf Club Membership", imgSrc: golfClub, position: { bottom: "10px", left: "470px" }, size: "80px", zIndex: 1, persistent: false }
   ],
   60: [
-    { name: "Classic Car", imgSrc: luxuryRetirement, position: { bottom: "70px", right: "30px" }, size: "200px", zIndex: 1 },
-    { name: "Helping Grandkids with College", imgSrc: grandkidsCollege, position: { bottom: "70px", right: "30px" }, size: "200px", zIndex: 1 },
-    { name: "Yacht", imgSrc: yacht, position: { bottom: "50px", left: "265px" }, size: "200px", zIndex: 1 }
+    { name: "Classic Car", imgSrc: luxuryRetirement, position: { bottom: "70px", right: "30px" }, size: "200px", zIndex: 1, persistent: false },
+    { name: "Helping Grandkids with College", imgSrc: grandkidsCollege, position: { bottom: "70px", right: "30px" }, size: "200px", zIndex: 1, persistent: false },
+    { name: "Yacht", imgSrc: yacht, position: { bottom: "50px", left: "265px" }, size: "200px", zIndex: 1, persistent: false }
   ]
 };
 
@@ -60,39 +60,45 @@ export default function GameOfLife() {
   const rounds = [20, 30, 40, 50, 60];
 
   const handleChoice = (choice, item) => {
-    if (clickCount >= 5) return; 
+    if (clickCount >= 5) return;
 
+    const incomeThisRound = 10_000;
     let newInvestments = [...investments];
     let newSavings = savings;
-    let newPurchases = [...purchasedItems];
-    
+    let newPurchases = purchasedItems.filter(i => i.persistent);
+
     if (choice === "invest") {
       newInvestments.push({
         decade: round,
-        amount: 10_000 
+        amount: incomeThisRound
       });
     } else if (choice === "save") {
-      newSavings += 10_000; 
+      newSavings += incomeThisRound;
     } else if (choice === "spend") {
       newPurchases.push(item);
     }
-    
+
     let newWealth = 0;
-    
+
     newInvestments.forEach(investment => {
       const decadesGrowing = round + 1 - investment.decade;
       newWealth += calculateDecadeGrowth(investment.amount, decadesGrowing);
     });
-    
+
     newWealth += newSavings;
+
+    if (round < 4) {
+      newWealth += 10_000;
+    }
+
     newWealth = Math.round(newWealth);
-    
-    setWealth(newWealth); 
+
+    setWealth(newWealth);
     setSavings(newSavings);
     setPurchasedItems(newPurchases);
     setInvestments(newInvestments);
     setClickCount(clickCount + 1);
-    
+
     if (round < 4) {
       setRound(round + 1);
     } else {
@@ -109,7 +115,7 @@ export default function GameOfLife() {
     setInvestments([]);
     setGameEnded(false);
   };
-  
+
   return (
     <div className="game-container">
       {clickCount === 0 && (
@@ -142,12 +148,12 @@ export default function GameOfLife() {
         <div className="card end-card">
           <h2>Game Over - Life Complete!</h2>
           <p>You accumulated <strong>${wealth.toLocaleString()}</strong> by age 70</p>
-          <p>Investments: ${Math.round(wealth - savings).toLocaleString()}</p>
-          <p>Savings: ${savings.toLocaleString()}</p>
+          <p>Wealth from Investments: ${Math.round(wealth - savings).toLocaleString()}</p>
+          <p>Wealth from Savings: ${savings.toLocaleString()}</p>
           <p>Purchases: {purchasedItems.length > 0 ? 
             purchasedItems.map(item => item.name).join(", ") : 
             "None"}</p>
-          <p>Percentage of total possible wealth: {Math.round((wealth / 1_894_208) * 100)}%</p>
+          <p><strong>Percentage of total possible wealth: {Math.round((wealth / 1_894_208) * 100)}%</strong></p>
           <button onClick={resetGame} >Restart</button>
         </div>
       )}
@@ -175,7 +181,8 @@ export default function GameOfLife() {
             style={{ 
               ...item.position, 
               width: item.size, 
-              zIndex: item.zIndex || 1 
+              zIndex: item.zIndex || 1, 
+              position: 'absolute' 
             }} 
           />
         ))}

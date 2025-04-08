@@ -35,10 +35,6 @@ body {
   width: 60%;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-}
-
 .choices button {
   margin: 10px;
   padding: 12px 20px;
