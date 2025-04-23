@@ -14,7 +14,7 @@
   --container-width-desktop: 1000px;
   --container-width-mobile: 100%;
   --container-height-desktop: 429px;
-  --container-height-mobile: 450px;
+  --container-height-mobile: 420px;
   overflow: auto;
 }
 
