@@ -39,7 +39,7 @@ const spendingOptions = {
       size: ["78px", "600px"], 
       mobileSize: ["200px", "200px"], 
       zIndex: [999, 1], 
-      persistent: true 
+      persistent: false 
     },
     { name: "Luxury Apartment", imgSrc: luxuryApartment, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
     { name: "Designer Clothes", imgSrc: designerClothes, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false }
