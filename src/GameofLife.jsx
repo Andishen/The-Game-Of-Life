@@ -33,11 +33,11 @@ const spendingOptions = {
         { bottom: "0", right: "15%" }
       ], 
       mobilePosition: [
-        { bottom: "0%", left: "32%" },
-        { bottom: "0%", left: "45%" }
+        { bottom: "0%", left: "60%" },
+        { bottom: "0%", left: "0%" }
       ], 
       size: ["78px", "600px"], 
-      mobileSize: ["200px", "200px"], 
+      mobileSize: ["78px", "600px"], 
       zIndex: [999, 1], 
       persistent: false 
     },
@@ -71,6 +71,7 @@ export default function GameOfLife() {
   const [wealth, setWealth] = useState(10_000);
   const [savings, setSavings] = useState(0); 
   const [purchasedItems, setPurchasedItems] = useState([]);
+  const [allPurchases, setAllPurchases] = useState([]);
   const [clickCount, setClickCount] = useState(0); 
   const [investments, setInvestments] = useState([]);
   const [gameEnded, setGameEnded] = useState(false);
@@ -98,6 +99,7 @@ export default function GameOfLife() {
     let newInvestments = [...investments];
     let newSavings = savings;
     let newPurchases = purchasedItems.filter(i => i.persistent);
+    let newAllPurchases = [...allPurchases];
 
     if (choice === "invest") {
       newInvestments.push({
@@ -108,6 +110,7 @@ export default function GameOfLife() {
       newSavings += incomeThisRound;
     } else if (choice === "spend") {
       newPurchases.push(item);
+      newAllPurchases.push({...item, age: rounds[round]});
     }
 
     let newWealth = 0;
@@ -128,6 +131,7 @@ export default function GameOfLife() {
     setWealth(newWealth);
     setSavings(newSavings);
     setPurchasedItems(newPurchases);
+    setAllPurchases(newAllPurchases);
     setInvestments(newInvestments);
     setClickCount(clickCount + 1);
 
@@ -143,6 +147,7 @@ export default function GameOfLife() {
     setWealth(10_000);
     setSavings(0);
     setPurchasedItems([]);
+    setAllPurchases([]);
     setClickCount(0);
     setInvestments([]);
     setGameEnded(false);
@@ -182,11 +187,20 @@ export default function GameOfLife() {
           <p>You accumulated <strong>${wealth.toLocaleString()}</strong> by age 70</p>
           <p>Wealth from Investments: ${Math.round(wealth - savings).toLocaleString()}</p>
           <p>Wealth from Savings: ${savings.toLocaleString()}</p>
-          <p>Purchases: {purchasedItems.length > 0 ? 
-            purchasedItems.map(item => item.name).join(", ") : 
-            "None"}</p>
+          {allPurchases.length > 0 ? (
+            <div>
+              <p><strong>Your Life Purchases:</strong></p>
+              <ul>
+                {allPurchases.map((item, index) => (
+                  <li key={index}>Age {item.age}: {item.name}</li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p>Purchases: None</p>
+          )}
           <p><strong>Percentage of total possible wealth: {Math.round((wealth / 1_894_208) * 100)}%</strong></p>
-          <button onClick={resetGame} >Restart</button>
+          <button onClick={resetGame}>Restart</button>
         </div>
       )}
 
