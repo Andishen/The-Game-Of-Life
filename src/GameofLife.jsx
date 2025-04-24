@@ -34,7 +34,7 @@ const spendingOptions = {
       ], 
       mobilePosition: [
         { bottom: "0%", left: "60%" },
-        { bottom: "0%", left: "0%" }
+        { bottom: "0%", right: "0%" }
       ], 
       size: ["78px", "600px"], 
       mobileSize: ["78px", "600px"], 
@@ -190,7 +190,7 @@ export default function GameOfLife() {
           {allPurchases.length > 0 ? (
             <div>
               <p><strong>Your Life Purchases:</strong></p>
-              <ul>
+              <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
                 {allPurchases.map((item, index) => (
                   <li key={index}>Age {item.age}: {item.name}</li>
                 ))}
