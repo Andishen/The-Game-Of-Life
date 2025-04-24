@@ -34,7 +34,7 @@ const spendingOptions = {
       ], 
       mobilePosition: [
         { bottom: "0%", left: "60%" },
-        { bottom: "0%", right: "0%" }
+        { bottom: "0%", right: "-40%" }
       ], 
       size: ["78px", "600px"], 
       mobileSize: ["78px", "600px"], 
