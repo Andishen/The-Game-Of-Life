@@ -1,6 +1,7 @@
 :root {
   --primary-color: #4361ee;
   --primary-hover: #3a56d4;
+  --primary-inset: #1e2f91; /* Added darker inset color */
   --secondary-color: #4CAF50;
   --secondary-hover: #45a049;
   --text-color: #333;
@@ -52,7 +53,7 @@ button {
   box-shadow:
     rgba(45, 35, 66, 0.2) 0 2px 4px,
     rgba(45, 35, 66, 0.15) 0 7px 13px -3px,
-    #d6d6e7 0 -3px 0 inset;
+    var(--primary-inset) 0 -3px 0 inset;
   box-sizing: border-box;
   color: var(--background-color);
   cursor: pointer;
@@ -82,10 +83,10 @@ button {
 .choices button:focus,
 button:focus {
   box-shadow:
-    #d6d6e7 0 0 0 1.5px inset,
+    var(--primary-inset) 0 0 0 1.5px inset,
     rgba(45, 35, 66, 0.4) 0 2px 4px,
     rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
-    #d6d6e7 0 -3px 0 inset;
+    var(--primary-inset) 0 -3px 0 inset;
 }
 
 .choices button:hover,
@@ -93,15 +94,19 @@ button:hover {
   box-shadow:
     rgba(45, 35, 66, 0.3) 0 4px 8px,
     rgba(45, 35, 66, 0.2) 0 7px 13px -3px,
-    #d6d6e7 0 -3px 0 inset;
+    var(--primary-inset) 0 -3px 0 inset;
   transform: translateY(-2px);
   background-color: var(--primary-hover);
 }
 
 .choices button:active,
 button:active {
-  box-shadow: #d6d6e7 0 3px 7px inset;
+  box-shadow: var(--primary-inset) 0 3px 7px inset;
   transform: translateY(2px);
+}
+
+img {
+  border-radius: 20px;
 }
 
 .character-container {
@@ -205,3 +210,4 @@ button:active {
     height: var(--container-height-mobile);
   }
 }
+
