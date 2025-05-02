@@ -122,9 +122,9 @@ export default function GameOfLife() {
 
     newWealth += newSavings;
 
-    if (round < 4) {
-      newWealth += 10_000;
-    }
+    if (round < 4 && choice !== "invest") {
+  newWealth += 10_000;
+}
 
     newWealth = Math.round(newWealth);
 
