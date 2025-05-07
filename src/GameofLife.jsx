@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import manImage from "/src/assets/man.png"; 
 import luxuryTravel from "/src/assets/luxury-travel.png";
 import newCar from "/src/assets/new-car.jpg";
 import latestGadgets from "/src/assets/latest-gadgets.jpg";
-import weddingHoneymoon from "/src/assets/wedding-honeymoon.webp";
-import wedding from "/src/assets/wedding.jpg";
+import wedding from "/src/assets/wedding.jpg"
 import luxuryApartment from "/src/assets/luxury-apartment.jpg";
 import designerClothes from "/src/assets/designer-clothes.png";
 import privateSchool from "/src/assets/private-school.jpg";
@@ -16,30 +14,25 @@ import golfClub from "/src/assets/golf.jpg";
 import luxuryRetirement from "/src/assets/luxury-retirement.webp";
 import grandkidsCollege from "/src/assets/grandkids-college.jpg";
 import yacht from "/src/assets/yacht.webp";
-
+import investment from "/src/assets/investment.jpg";
+import saving from "/src/assets/saving.jpg";
 
 const spendingOptions = {
   20: [
-    { name: "Florida Vacation", imgSrc: luxuryTravel, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
+    { name: "Florida Vacation", imgSrc: luxuryTravel, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
     { name: "Nice Car", imgSrc: newCar, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
     { name: "Gaming PC", imgSrc: latestGadgets, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false }
   ],
   30: [
-    { 
-      name: "Get Married", 
-      imgSrc: [weddingHoneymoon, wedding], 
-      position: [
-        { bottom: "0", right: "35%" },
-        { bottom: "0", right: "15%" }
-      ], 
-      mobilePosition: [
-        { bottom: "0%", left: "60%" },
-        { bottom: "0%", right: "-40%" }
-      ], 
-      size: ["78px", "600px"], 
-      mobileSize: ["78px", "600px"], 
-      zIndex: [999, 1], 
-      persistent: false 
+    {
+      name: "Get Married",
+      imgSrc: [wedding],
+      position: [{ bottom: "0", left: "20%" }],
+      mobilePosition: [ { bottom: "0%", right: "-40%" }],
+      size: ["600px"],
+      mobileSize: ["600px"],
+      zIndex: [1],
+      persistent: false
     },
     { name: "Luxury Apartment", imgSrc: luxuryApartment, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
     { name: "Designer Clothes", imgSrc: designerClothes, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false }
@@ -61,6 +54,28 @@ const spendingOptions = {
   ]
 };
 
+const actionVisuals = {
+  invest: {
+    name: "Investing",
+    imgSrc: investment,
+    position: { bottom: "0", left: "20%" },
+    mobilePosition: { bottom: "20%", left: "10%" },
+    size: "550px",
+    mobileSize: "600px",
+    zIndex: 2,
+    persistent: false 
+  },
+  save: {
+    name: "Saving",
+    imgSrc: saving,
+    position: { bottom: "0", left: "20%" },
+    mobilePosition: { bottom: "20%", left: "30%" },
+    size: "600px",
+    mobileSize: "600px",
+    zIndex: 2,
+    persistent: false 
+  }
+};
 
 const calculateDecadeGrowth = (principal, decades) => {
   return principal * Math.pow(1.1, decades * 10);
@@ -69,10 +84,10 @@ const calculateDecadeGrowth = (principal, decades) => {
 export default function GameOfLife() {
   const [round, setRound] = useState(0);
   const [wealth, setWealth] = useState(10_000);
-  const [savings, setSavings] = useState(0); 
+  const [savings, setSavings] = useState(0);
   const [purchasedItems, setPurchasedItems] = useState([]);
   const [allPurchases, setAllPurchases] = useState([]);
-  const [clickCount, setClickCount] = useState(0); 
+  const [clickCount, setClickCount] = useState(0);
   const [investments, setInvestments] = useState([]);
   const [gameEnded, setGameEnded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -86,10 +101,7 @@ export default function GameOfLife() {
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
-
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const handleChoice = (choice, item) => {
@@ -102,30 +114,25 @@ export default function GameOfLife() {
     let newAllPurchases = [...allPurchases];
 
     if (choice === "invest") {
-      newInvestments.push({
-        decade: round,
-        amount: incomeThisRound
-      });
+      newInvestments.push({ decade: round, amount: incomeThisRound });
+      newPurchases.push(actionVisuals.invest);
     } else if (choice === "save") {
       newSavings += incomeThisRound;
+      newPurchases.push(actionVisuals.save);
     } else if (choice === "spend") {
       newPurchases.push(item);
-      newAllPurchases.push({...item, age: rounds[round]});
+      newAllPurchases.push({ ...item, age: rounds[round] });
     }
 
     let newWealth = 0;
-
     newInvestments.forEach(investment => {
       const decadesGrowing = round + 1 - investment.decade;
       newWealth += calculateDecadeGrowth(investment.amount, decadesGrowing);
     });
-
     newWealth += newSavings;
-
     if (round < 4 && choice !== "invest") {
-  newWealth += 10_000;
-}
-
+      newWealth += 10_000;
+    }
     newWealth = Math.round(newWealth);
 
     setWealth(newWealth);
@@ -168,12 +175,8 @@ export default function GameOfLife() {
           <h2>Age {rounds[round]}</h2>
           <p>You have $10,000 to allocate every decade</p>
           <div className="choices">
-            <button onClick={() => handleChoice("invest")} disabled={clickCount >= 5}>
-              Invest
-            </button>
-            <button onClick={() => handleChoice("save")} disabled={clickCount >= 5}>
-              Save
-            </button>
+            <button onClick={() => handleChoice("invest")} disabled={clickCount >= 5}>Invest</button>
+            <button onClick={() => handleChoice("save")} disabled={clickCount >= 5}>Save</button>
             {spendingOptions[rounds[round]].map((option, index) => (
               <button key={index} onClick={() => handleChoice("spend", option)} disabled={clickCount >= 5}>
                 {option.name}
@@ -205,47 +208,34 @@ export default function GameOfLife() {
       )}
 
       <div className="character-container">
-        <img 
-          src={manImage} 
-          alt="Player Character" 
-          className="character" 
-          style={{ 
-            zIndex: 2, 
-            position: 'absolute', 
-            bottom: '0px', 
-            left: '50%', 
-            transform: 'translateX(-50%)'
-          }} 
-        />
-
         {purchasedItems.map((item, index) => (
           Array.isArray(item.imgSrc) ? (
             item.imgSrc.map((src, i) => (
-              <img 
+              <img
                 key={`${index}-${i}`}
-                src={src} 
-                alt={`${item.name} ${i + 1}`} 
-                className="purchase" 
-                style={{ 
-                  ...(isMobile ? item.mobilePosition[i] : item.position[i]), 
-                  width: isMobile ? item.mobileSize[i] : item.size[i], 
-                  zIndex: item.zIndex[i] || 1, 
-                  position: 'absolute' 
-                }} 
+                src={src}
+                alt={`${item.name} ${i + 1}`}
+                className="purchase"
+                style={{
+                  ...(isMobile ? item.mobilePosition[i] : item.position[i]),
+                  width: isMobile ? item.mobileSize[i] : item.size[i],
+                  zIndex: item.zIndex[i] || 1,
+                  position: 'absolute'
+                }}
               />
             ))
           ) : (
-            <img 
-              key={index} 
-              src={item.imgSrc} 
-              alt={item.name} 
-              className="purchase" 
-              style={{ 
-                ...(isMobile ? item.mobilePosition : item.position), 
-                width: isMobile ? item.mobileSize : item.size, 
-                zIndex: item.zIndex || 1, 
-                position: 'absolute' 
-              }} 
+            <img
+              key={index}
+              src={item.imgSrc}
+              alt={item.name}
+              className="purchase"
+              style={{
+                ...(isMobile ? item.mobilePosition : item.position),
+                width: isMobile ? item.mobileSize : item.size,
+                zIndex: item.zIndex || 1,
+                position: 'absolute'
+              }}
             />
           )
         ))}
