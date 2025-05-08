@@ -20,30 +20,20 @@ import saving from "/src/assets/saving.jpg";
 const spendingOptions = {
   20: [
     { name: "Florida Vacation", imgSrc: luxuryTravel, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
-<<<<<<< HEAD
     { name: "Nice Car", imgSrc: newCar, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
     { name: "Gaming PC", imgSrc: latestGadgets, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false }
-=======
-    { name: "Nice Car", imgSrc: newCar, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
-    { name: "Gaming PC", imgSrc: latestGadgets, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false }
->>>>>>> ad3f07e (remove gap)
   ],
   30: [
     {
       name: "Get Married",
       imgSrc: [wedding],
       position: [{ bottom: "0", left: "20%" }],
-<<<<<<< HEAD
       mobilePosition: [ { bottom: "0%", right: "-40%" }],
-=======
-      mobilePosition: [ { bottom: "20%", right: "-40%" }],
->>>>>>> ad3f07e (remove gap)
       size: ["600px"],
       mobileSize: ["600px"],
       zIndex: [1],
       persistent: false
     },
-<<<<<<< HEAD
     { name: "Luxury Apartment", imgSrc: luxuryApartment, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
     { name: "Designer Clothes", imgSrc: designerClothes, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false }
   ],
@@ -61,25 +51,6 @@ const spendingOptions = {
     { name: "Classic Car", imgSrc: luxuryRetirement, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
     { name: "Helping Grandkids with College", imgSrc: grandkidsCollege, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
     { name: "Yacht", imgSrc: yacht, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false }
-=======
-    { name: "Luxury Apartment", imgSrc: luxuryApartment, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
-    { name: "Designer Clothes", imgSrc: designerClothes, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false }
-  ],
-  40: [
-    { name: "Private School for Kids", imgSrc: privateSchool, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
-    { name: "Exotic Car", imgSrc: exoticCar, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "0%", left: "20%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
-    { name: "Home Renovation", imgSrc: homeRenovation, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false }
-  ],
-  50: [
-    { name: "Vacation Home", imgSrc: vacationHome, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
-    { name: "World Tour", imgSrc: worldTour, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
-    { name: "Golf Club Membership", imgSrc: golfClub, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false }
-  ],
-  60: [
-    { name: "Classic Car", imgSrc: luxuryRetirement, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
-    { name: "Helping Grandkids with College", imgSrc: grandkidsCollege, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false },
-    { name: "Yacht", imgSrc: yacht, position: { bottom: "0", right: "21%" }, mobilePosition: { bottom: "20%", left: "0%" }, size: "600px", mobileSize: "600px", zIndex: 1, persistent: false }
->>>>>>> ad3f07e (remove gap)
   ]
 };
 
@@ -88,11 +59,7 @@ const actionVisuals = {
     name: "Investing",
     imgSrc: investment,
     position: { bottom: "0", left: "20%" },
-<<<<<<< HEAD
     mobilePosition: { bottom: "20%", left: "10%" },
-=======
-    mobilePosition: { bottom: "0%", left: "-40%" },
->>>>>>> ad3f07e (remove gap)
     size: "550px",
     mobileSize: "600px",
     zIndex: 2,
@@ -102,11 +69,7 @@ const actionVisuals = {
     name: "Saving",
     imgSrc: saving,
     position: { bottom: "0", left: "20%" },
-<<<<<<< HEAD
     mobilePosition: { bottom: "20%", left: "30%" },
-=======
-    mobilePosition: { bottom: "10%", left: "-20%" },
->>>>>>> ad3f07e (remove gap)
     size: "600px",
     mobileSize: "600px",
     zIndex: 2,
